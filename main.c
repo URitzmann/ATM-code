@@ -64,6 +64,7 @@ int main() {
          heun(spin, n, find_index, sx,sy,sz, ceta_x, ceta_y, ceta_z);
          if(n%100000==0){
            mx=my=mz=0.0;
+           /*
            for(k=RAND_PLUS;k<LZ+RAND_PLUS;k++){
              magx[k-RAND_PLUS]=magy[k-RAND_PLUS]=magz[k-RAND_PLUS]=0.0;
              for(i=RAND_PLUS;i<LX+RAND_PLUS;i++){
@@ -92,7 +93,7 @@ int main() {
              fprintf(test, "%d \t %le \t %le \t %le \n", k, magx[k], magy[k], magz[k]);
            }
            fclose(test);
-         }
+         }*/
      }}
   exit(0);
 }
