@@ -55,16 +55,14 @@ int main() {
   /* time-integration loop */
   for(n = 1; n <= NMAX; n++){
      for(l = 0; l < spin; l++){
-         i = find_index[l][0]; j = find_index[l][1]; k = find_index[l][2];
          ceta_x[l] = gsl_ran_gaussian_ziggurat(rng, temp);
          ceta_y[l] = gsl_ran_gaussian_ziggurat(rng, temp);
          ceta_z[l] = gsl_ran_gaussian_ziggurat(rng, temp);
          }
          /*time evolution*/
          heun(spin, n, find_index, sx,sy,sz, ceta_x, ceta_y, ceta_z);
-         if(n%100000==0){
+         if(n%100==0){
            mx=my=mz=0.0;
-           /*
            for(k=RAND_PLUS;k<LZ+RAND_PLUS;k++){
              magx[k-RAND_PLUS]=magy[k-RAND_PLUS]=magz[k-RAND_PLUS]=0.0;
              for(i=RAND_PLUS;i<LX+RAND_PLUS;i++){
@@ -74,18 +72,17 @@ int main() {
                  magz[k-RAND_PLUS]+=sz[i][j][k];
                }
              }
-             mx+=magx[k];
-             my+=magy[k];
-             mz+=magz[k];
              magx[k-RAND_PLUS]=magx[k-RAND_PLUS]/(LX*LY);
              magy[k-RAND_PLUS]=magy[k-RAND_PLUS]/(LX*LY);
              magz[k-RAND_PLUS]=magz[k-RAND_PLUS]/(LX*LY);
+             mx+=magx[k-RAND_PLUS];
+             my+=magy[k-RAND_PLUS];
+             mz+=magz[k-RAND_PLUS];
+
            }
-           if(n%100==0){
              test=fopen("mag.dat","a");
              fprintf(test, "%d \t %le \t %le \t %le \n", n, mx/LZ, my/LZ, mz/LZ);
              fclose(test);
-           }
            if(n%100000==0){
            sprintf(output,"mag_%d.dat",n );
            test=fopen(output,"a");
@@ -93,7 +90,7 @@ int main() {
              fprintf(test, "%d \t %le \t %le \t %le \n", k, magx[k], magy[k], magz[k]);
            }
            fclose(test);
-         }*/
-     }}
+         }}
+     }
   exit(0);
 }
